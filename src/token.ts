@@ -17,13 +17,11 @@ export default async function token(req: FastifyRequest, res: FastifyReply) {
   const response = await fetch(TOKEN_URL, {
     method: "POST",
     headers: {
-      Authorization: `Basic ${Buffer.from(
-        `${client_id}:${CLIENT_SECRET}`
-      ).toString("base64")}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       client_id,
+      client_secret: CLIENT_SECRET,
       code,
       ...extra,
       redirect_uri: PROXY_REDIRECT_URL,
